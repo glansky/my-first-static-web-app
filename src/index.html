@@ -2,25 +2,114 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--<link rel="stylesheet" href="styles.css">-->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  
-  <title>Vanilla JavaScript App</title>
+    <title>Chapter 02, Exercise 01</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="app.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        console.log("Calc");
+    </script>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 <body>
-  <div class="container">
-    <main role="main" class="pb-3">
-      <div class="text-center">
-        <h1 class="display-4">Welcome to English</h1>
-        <p>Learn about ...</p>
-      </div>
-    </main>
-  </div>
-
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <h3>Energy / Frequency / Wavelength Converter</h3>
+    <div class="calc">
+        <table>
+            <tr>
+                <td>Wavelength [&mu;m]:</td>
+                <td><input type="text" id="wl" onkeypress="wlEnter()" /></td>
+                <td>&lambda; = c &#8725 &nu;</td>
+            </tr>
+            <tr>
+                <td>Frequency [THz]:</td>
+                <td><input type="text" id="fr" onkeypress="frEnter()" /></td>
+                <td>&nu; = c &#8725 &lambda;</td>
+            </tr>
+            <tr>
+                <td>Wavenumber [cm<sup>-1</sup>]:</td>
+                <td><input type="text" id="wn" onkeypress="wnEnter()" /></td>
+                <td>&omega; = &lambda;<sup>-1</sup></td>
+            </tr>
+            <tr>
+                <td>Photon Energy [eV]:</td>
+                <td><input type="text" id="en" onkeypress="enEnter()" /></td>
+                <td>E = h &sdot; &nu;</td>
+            </tr>
+            <tr>
+                <td>Oscillation Period [ps]:</td>
+                <td><input type="text" id="pd" onkeypress="pdEnter()" /></td>
+                <td>T = &nu;<sup>-1</sup></td>
+            </tr>
+        </table>
+    </div>
 </body>
 
 </html>
+
+<script>
+    $("body").css("background", "lightgray");
+
+    function wlEnter() {
+        var wavelength = $("#wl").val();
+
+        $("#fr").val(300 / wavelength);
+
+        $("#wn").val(10000 / wavelength);
+
+        $("#en").val(4.135667516e-15 * (300 / wavelength) * 1e+12);
+
+        $("#pd").val(wavelength / 300);
+    }
+
+    function frEnter() {
+        var frequency = $("#fr").val();
+        var wavelength = 300 / frequency;
+
+        $("#wl").val(wavelength);
+
+        $("#wn").val(10000 / wavelength);
+
+        $("#en").val(4.135667516e-15 * (300 / wavelength) * 1e+12);
+
+        $("#pd").val(wavelength / 300);
+    }
+
+    function wnEnter() {
+        var wavenumber = $("#wn").val();
+        var wavelength = 10000 / wavenumber;
+
+        $("#wl").val(wavelength);
+
+        $("#fr").val(300 / wavelength);
+
+        $("#en").val(4.135667516e-15 * (300 / wavelength) * 1e+12);
+
+        $("#pd").val(wavelength / 300);
+    }
+
+    function enEnter() {
+        var energy = $("#en").val();
+        var wavelength = 4.135667516e-15 * (300 / en) * 1e+12;
+
+        $("#wl").val(wavelength);
+
+        $("#fr").val(300 / wavelength);
+
+        $("#wn").val(10000 / wavelength);
+
+        $("#pd").val(wavelength / 300);
+    }
+
+    function pdEnter() {
+        var period = $("#pd").val();
+        var wavelength = period * 300;
+
+        $("#wl").val(wavelength);
+
+        $("#fr").val(300 / wavelength);
+
+        $("#wn").val(10000 / wavelength);
+
+        $("#en").val(4.135667516e-15 * (300 / wavelength) * 1e+12);
+    }
+
+</script>
